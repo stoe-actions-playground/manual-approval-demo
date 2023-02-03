@@ -1,0 +1,25 @@
+name: manual-approval-demo
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "Hello build!"
+  
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "Hello deploy!"
