@@ -1,4 +1,4 @@
-name: manual-approval-demo
+name: deploy-demo
 
 on:
   push:
@@ -18,20 +18,24 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: build
-    environment: test
+    environment: 
+      name: test
+      url: https://docs.github.com
     if: ${{ github.event_name == 'pull_request' }}
 
     steps:
       - uses: actions/checkout@v3
-      - run: echo "Hello deploy!"
+      - run: echo "Hello test deploy!"
   
   deploy-production:
     runs-on: ubuntu-latest
 
     needs: build
-    environment: production
+    environment: 
+      name: production
+      url: https://docs.github.com
     if: ${{ github.event_name != 'pull_request' }}
 
     steps:
       - uses: actions/checkout@v3
-      - run: echo "Hello deploy!"
+      - run: echo "Hello production deploy!"
